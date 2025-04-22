@@ -1,3 +1,126 @@
+<!DOCTYPE html> 
+<html lang="pt-br"> <!-- Define o idioma da página como português do Brasil -->
+<head>
+    <meta charset="UTF-8"> <!-- Define o conjunto de caracteres para UTF-8 (suporta acentuação e caracteres especiais) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ajusta o layout da página para dispositivos móveis (responsividade) -->
+    <title>Página Inicial</title> <!-- Define o título da página que aparece na aba do navegador -->
+    <style>
+        /* Estilo para o corpo da página */
+        body {
+            font-family: Arial, sans-serif; /* Define a fonte usada no corpo da página */
+            margin: 0; /* Remove as margens padrões do navegador */
+            padding: 0; /* Remove o preenchimento padrão do navegador */
+            background-image: url(fundo1.jpg); /* Define uma imagem de fundo para a página */
+            display: flex; /* Usa o modelo de layout flexível */
+            flex-direction: column; /* Organiza os elementos na direção de uma coluna */
+            min-height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
+        }
+
+        /* Estilo para o cabeçalho da página */
+        header {
+            background-color: #333; /* Define a cor de fundo do cabeçalho */
+            color: white; /* Define a cor do texto como branco */
+            padding: 10px; /* Adiciona preenchimento ao redor do texto */
+            text-align: center; /* Centraliza o texto dentro do cabeçalho */
+        }
+
+        /* Estilo para o título dentro do cabeçalho */
+        header h1 {
+            font-size: 30px; /* Aumenta o tamanho da fonte do título */
+        }
+
+        /* Estilo para o menu de navegação */
+        nav {
+            background-color: #444; /* Define a cor de fundo do menu de navegação */
+            padding: 10px; /* Adiciona preenchimento ao redor do menu */
+            text-align: center; /* Centraliza os itens dentro do menu */
+        }
+
+        /* Estilo para os links do menu de navegação */
+        nav a {
+            color: white; /* Define a cor do texto dos links como branca */
+            margin: 0 130px; /* Adiciona espaçamento horizontal entre os links */
+            text-decoration: none; /* Remove o sublinhado dos links */
+            font-size: 40px; /* Aumenta o tamanho da fonte dos links */
+        }
+
+        /* Estilo quando o mouse passa sobre o link no menu de navegação */
+        nav a:hover {
+            text-decoration: underline; /* Adiciona sublinhado quando o mouse passa sobre o link */
+        }
+
+        /* Estilo para a área de conteúdo */
+        .content {
+            flex-grow: 1; /* Faz o conteúdo crescer e ocupar o espaço restante */
+            padding: 40px; /* Adiciona preenchimento ao redor do conteúdo */
+            text-align: center; /* Centraliza o conteúdo */
+        }
+
+        /* Estilo para o contêiner de imagens */
+        .image-container {
+            display: flex; /* Usa o modelo de layout flexível para o contêiner de imagens */
+            justify-content: center; /* Centraliza as imagens dentro do contêiner */
+            gap: 240px; /* Ajusta o espaçamento entre as imagens */
+            margin-top: 10px; /* Adiciona espaço acima do contêiner de imagens */
+        }
+
+        /* Estilo específico para a primeira imagem de "Coup" (movendo para a esquerda) */
+        .image-container a:first-child {
+            margin-left: 210px; /* Move a imagem de "Coup" para a esquerda */
+        }
+        
+        /* Estilo específico para a última imagem de "The Resistance" (movendo para a direita) */
+        .image-container a:last-child {
+            margin-right: 250px; /* Move a imagem de "The Resistance" para a direita */
+        }
+        
+        /* Estilo das imagens dentro do contêiner de imagens */
+        .image-container a img {
+            width: auto; /* Mantém as dimensões naturais da imagem */
+            height: auto; /* Mantém as dimensões naturais da imagem */
+            max-width: 100%; /* Limita a largura das imagens para não ultrapassarem o contêiner */
+            max-height: 300px; /* Limita a altura das imagens para não ultrapassarem o contêiner */
+        }
+
+        /* Estilo para o rodapé da página */
+        footer {
+            background-color: #333; /* Define a cor de fundo do rodapé */
+            color: white; /* Define a cor do texto no rodapé como branco */
+            text-align: center; /* Centraliza o texto dentro do rodapé */
+            padding: 1px; /* Adiciona preenchimento ao redor do texto do rodapé */
+            margin-top: auto; /* Garante que o rodapé fique no fundo da página se o conteúdo for pequeno */
+            width: 100%; /* Faz o rodapé ocupar toda a largura da tela */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Party games</h1> <!-- Título da página, exibido no cabeçalho -->
+</header>
+
+<nav>
+    <a href="coup.html">Coup</a> <!-- Link para a página do jogo "Coup" -->
+    <a href="theresistance.html">The Resistance</a> <!-- Link para a página do jogo "The Resistance" -->
+</nav>
+
+<div class="content">
+    <div class="image-container">
+        <!-- Imagem de Coup, clicando nela leva para a página "coup.html" -->
+        <a href="coup.html"><img src="Coup.jpg" alt="Coup"></a>
+        
+        <!-- Imagem de The Resistance, clicando nela leva para a página "theresistance.html" -->
+        <a href="theresistance.html"><img src="resistance.jpg" alt="The Resistance"></a>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2025 - Leonel, João Victor, Yudi</p> <!-- Texto no rodapé com a indicação de direitos autorais -->
+</footer>
+
+</body>
+</html>
+
 <!DOCTYPE html>
 <html lang="pt-br"> <!-- Define o idioma da página como português do Brasil -->
 <head>
