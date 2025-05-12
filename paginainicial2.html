@@ -1,0 +1,125 @@
+<!DOCTYPE html> 
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <style>
+        h1 {
+            font-size: 50px;
+        }
+        img {
+            border-radius: 5px; /* Adiciona borda arredondada */
+            border: 2px solid #333; /* Define uma borda ao redor da imagem */
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* Adiciona sombra à imagem */
+            height: auto; /* Mantém a proporção da imagem */
+            scale: 3;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url(fundo1.jpg);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
+        }
+        header {
+            font-family: arial;
+            background-color: #333;
+            color: white;
+            padding: 1px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 30px; /* Aumenta o tamanho da fonte do título */
+        }
+        nav {
+            font-family: michroma;
+            background-image: url(fundo1.jpg);
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 130px;
+            text-decoration: none;
+            font-size: 40px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            flex-grow: 1; /* Faz o conteúdo crescer e ocupar o espaço restante */
+            padding: 40px;
+            text-align: center;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center; /* Centraliza as imagens no contêiner */
+            gap: 350px; /* Ajusta o espaçamento entre as imagens */
+            margin-top: 150px; /* Espaço entre os links e as imagens */
+        }
+        /* Estilo da imagem de Coup (movendo para a esquerda) */
+        .image-container a:first-of-type {
+            margin-left: 170px; /* Move a imagem de "Coup" para a esquerda */
+            scale: ;
+        }
+        
+        .image-container a: {
+            margin-left: 200px; /* Move a imagem de "Coup" para a esquerda */
+            scale: ;
+        }
+        
+        /* Estilo da imagem de The Resistance (movendo para a direita) */
+        .image-container a:last-child {
+            margin-right: 80px; /* Move a imagem de "The Resistance" para a direita */
+            scale: 0.75 ;
+        }
+        
+        .image-container a img {
+            width: auto; /* Mantém as dimensões naturais da imagem */
+            height: auto; /* Mantém as dimensões naturais da imagem */
+            max-width: 100%; /* Limita a largura das imagens para não ultrapassarem o contêiner */
+            max-height: 300px; /* Limita a altura das imagens para não ultrapassarem o contêiner */
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1px;
+            margin-top: auto; /* Garante que o footer fique no fundo se o conteúdo for pequeno */
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Party games</h1>
+</header>
+
+<nav>
+    <a href="coup.html">Coup</a>
+    <a href="theresistance.html">The Resistance</a>
+    <a href="War.html">War</a>
+</nav>
+
+<div class="content">
+    <div class="image-container">
+        <!-- Imagem de Coup -->
+        <a href="coup.html"><img src="Coup.jpg" alt="Coup"></a>
+        
+        <!-- Imagem de The Resistance -->
+        <a href="theresistance.html"><img src="resistance.jpg" alt="The Resistance"></a>
+        
+        <a href="War.html"><img src="warcapaSE.jpg" alt="War"></a>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2025 - Leonel, João Victor, Yudi</p>
+</footer>
+
+</body>
+</html>

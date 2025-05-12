@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        h1{
+            color: whitesmoke;
+            margin: 30px;
+        }
+
+        /* Estilos da imagem */
+        img {
+            border-radius: 10px; /* Adiciona borda arredondada */
+            border: 5px solid #333; /* Define uma borda ao redor da imagem */
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* Adiciona sombra à imagem */
+            height: auto; /* Mantém a proporção da imagem */
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Primeira imagem ficará centralizada */
+        .content img:first-of-type {
+            float: right; /* Alinha a imagem à direita */
+            margin-left: 20px; /* Adiciona espaço à esquerda da imagem */
+            width: 450px; /* Define a largura da imagem */
+            height: 300px; /* Mantém a proporção da imagem */
+            border-radius: 10px; /* Adiciona borda arredondada */
+            border: 5px solid #333; /* Define uma borda ao redor da imagem */
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* Adiciona sombra à imagem */
+        }
+
+        /* Estilos do restante das imagens, que ficarão na parte inferior */
+        .bottom-images {
+            display: flex;
+            justify-content: center; /* Centraliza as imagens */
+            flex-wrap: wrap; /* Faz com que as imagens se ajustem se não caberem em uma linha */
+            gap: 20px; /* Espaço entre as imagens */
+            margin-top: 10px; /* Distância das imagens da parte superior */
+        }
+
+        .bottom-images img {
+            width: 150px; /* Tamanho das imagens na parte inferior */
+            height: auto;
+        }
+
+        p {
+            color: whitesmoke;
+            max-width: 800px;
+            word-wrap: break-word;
+            margin: 20px;
+        }
+
+        /* Estilos do botão */
+        button {
+            background-color: #221e1c;
+            color: white;
+            border: none;
+            padding: 15px 32px;
+            text-align: left;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #141e62;
+        }
+
+        /* Estilos do corpo */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+            background-image: url('fundoo.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Estilos de navegação */
+        nav {
+            background-color: #444;
+            padding: 10px 0;
+            text-align: left;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilos do conteúdo */
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Estilos do rodapé */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /* Classe para centralizar a imagem quando for clicada */
+        .image-expanded {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(3);
+            z-index: 1000; /* Coloca a imagem acima de outros elementos */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            cursor: zoom-out;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <button onclick="window.location.href='paginainicial.html';">Ir para a página inicial</button>
+    </nav>
+
+    <div class="content">
+        <img src="warjogo.jpg" alt="Imagem" class="image">
+        <h1> War </h1>
+
+        <p> War é um jogo de tabuleiro de estratégia e conquista, onde os jogadores assumem o papel de comandantes de exércitos em uma batalha pela dominação global. O objetivo principal é conquistar territórios e eliminar os adversários, utilizando uma combinação de sorte (dados) e tática.</p>
+        <p> O tabuleiro é dividido em territórios espalhados pelo mundo, e os jogadores começam com um número específico de exércitos em áreas aleatórias. Cada jogador deve planejar seus movimentos com sabedoria, atacar ou se defender estrategicamente, e formar alianças temporárias para conquistar territórios.</p>
+        <p> Cada jogador recebe um objetivo secreto no início da partida, e para vencer ele deve completá-lo utilizando diversas estratégias. É um jogo perfeito para quem gosta de desafios!</p>
+        <h1> Manual </h1>
+    </div>
+    
+    <!-- As imagens que ficarão na parte inferior -->
+    <div class="bottom-images">
+        <img src="warmanual1.png" alt="Imagem" class="clickable-image">
+        <img src="warmanual2.png" alt="Imagem" class="clickable-image">
+        <img src="warmanual3.png" alt="Imagem" class="clickable-image">
+        <img src="warmanual4.png" alt="Imagem" class="clickable-image">
+        <img src="warmanual5.png" alt="Imagem" class="clickable-image">
+        <img src="warmanual6.png" alt="Imagem" class="clickable-image">
+        <img src="warmanual7.png" alt="Imagem" class="clickable-image">
+        <img src="warmanual8.png" alt="Imagem" class="clickable-image">
+    </div>
+
+    <script> // Parte do código em JavaScrip
+        document.querySelectorAll('.clickable-image').forEach(img => {
+            img.addEventListener('click', function() {
+                if (!this.classList.contains('image-expanded')) {
+                    this.classList.add('image-expanded');
+                } else {
+                    this.classList.remove('image-expanded');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
