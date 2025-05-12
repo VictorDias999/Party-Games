@@ -1,168 +1,177 @@
 <!DOCTYPE html>
-<html lang="pt-br"> <!-- Define o idioma da página como português do Brasil -->
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8"> <!-- Define o conjunto de caracteres para UTF-8 (suporta acentuação e caracteres especiais) -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ajusta o layout da página para dispositivos móveis (responsividade) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Estilos para o título da página (h1) */
-        h1 {
-            color: whitesmoke; /* Define a cor do título como "whitesmoke" */
-            margin: 30px; /* Adiciona margem ao redor do título */
+        h1{
+            color: whitesmoke;
+            margin: 30px;
         }
 
-        /* Estilos gerais para todas as imagens */
+        /* Estilos da imagem */
         img {
-            border-radius: 10px; /* Adiciona bordas arredondadas às imagens */
-            border: 5px solid #333; /* Define uma borda escura ao redor das imagens */
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra suave ao redor das imagens */
+            border-radius: 10px; /* Adiciona borda arredondada */
+            border: 5px solid #333; /* Define uma borda ao redor da imagem */
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* Adiciona sombra à imagem */
             height: auto; /* Mantém a proporção da imagem */
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* Estilos específicos para a primeira imagem dentro de .content (centralizada à direita) */
+        /* Primeira imagem ficará centralizada */
         .content img:first-of-type {
-            float: right; /* Faz a primeira imagem flutuar à direita */
+            float: right; /* Alinha a imagem à direita */
             margin-left: 20px; /* Adiciona espaço à esquerda da imagem */
-            width: auto; /* Define a largura automaticamente */
-            height: 300px; /* Define a altura da imagem como 300px */
-            border-radius: 10px; /* Adiciona bordas arredondadas */
-            border: 5px solid #333; /* Define uma borda escura ao redor da imagem */
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra à imagem */
+            width: auto; /* Define a largura da imagem */
+            height: 300px; /* Mantém a proporção da imagem */
+            border-radius: 10px; /* Adiciona borda arredondada */
+            border: 5px solid #333; /* Define uma borda ao redor da imagem */
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* Adiciona sombra à imagem */
         }
 
-        /* Estilos para o contêiner de imagens na parte inferior da página */
+        /* Estilos do restante das imagens, que ficarão na parte inferior */
         .bottom-images {
-            display: flex; /* Exibe as imagens em linha com flexbox */
-            justify-content: center; /* Centraliza as imagens no contêiner */
+            display: flex;
+            justify-content: center; /* Centraliza as imagens */
             flex-wrap: wrap; /* Faz com que as imagens se ajustem se não caberem em uma linha */
-            gap: 20px; /* Adiciona espaçamento entre as imagens */
-            margin-top: 30px; /* Distância das imagens da parte superior */
+            gap: 20px; /* Espaço entre as imagens */
+            margin-top: 10px; /* Distância das imagens da parte superior */
         }
 
-        /* Estilo das imagens na parte inferior da página */
         .bottom-images img {
-            width: 150px; /* Define a largura das imagens como 150px */
-            height: auto; /* Mantém a proporção das imagens */
+            width: 150px; /* Tamanho das imagens na parte inferior */
+            height: auto;
         }
 
-        /* Estilo para o parágrafo (p) */
         p {
-            color: whitesmoke; /* Define a cor do texto como "whitesmoke" */
-            max-width: 800px; /* Limita a largura do texto para 800px */
-            word-wrap: break-word; /* Quebra as palavras longas para evitar que saiam da largura */
-            margin: 20px; /* Adiciona margem ao redor do texto */
+            color: whitesmoke;
+            max-width: 800px;
+            word-wrap: break-word;
+            margin: 20px;
         }
 
-        /* Estilos do botão de navegação */
+        /* Estilos do botão */
         button {
-            background-color: #221e1c; /* Define a cor de fundo do botão */
-            color: white; /* Define a cor do texto do botão como branco */
-            border: none; /* Remove a borda do botão */
-            padding: 15px 32px; /* Adiciona preenchimento ao redor do texto do botão */
-            text-align: left; /* Alinha o texto do botão à esquerda */
-            text-decoration: none; /* Remove o sublinhado do texto do botão */
-            display: inline-block; /* Faz o botão ser exibido ao lado de outros elementos */
-            font-size: 12px; /* Define o tamanho da fonte como 12px */
-            cursor: pointer; /* Altera o cursor para indicar que é um botão clicável */
-            border-radius: 5px; /* Adiciona bordas arredondadas ao botão */
-            transition: background-color 0.3s ease; /* Adiciona transição suave para mudança de cor */
+            background-color: #221e1c;
+            color: white;
+            border: none;
+            padding: 15px 32px;
+            text-align: left;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
 
-        /* Estilo quando o mouse passa sobre o botão */
         button:hover {
-            background-color: #141e62; /* Altera a cor de fundo do botão quando o mouse passa sobre ele */
+            background-color: #141e62;
         }
 
-        /* Estilos do corpo da página */
+        /* Estilos do corpo */
         body {
-            font-family: Arial, sans-serif; /* Define a fonte do corpo da página */
-            margin: 0; /* Remove as margens padrão do navegador */
-            padding: 0; /* Remove o preenchimento padrão do navegador */
-            text-align: left; /* Alinha o texto à esquerda */
-            background-image: url('fundoo.jpg'); /* Define uma imagem de fundo para a página */
-            background-size: cover; /* Faz a imagem de fundo cobrir toda a tela */
-            background-position: center; /* Centraliza a imagem de fundo */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+            background-image: url('fundoo.jpg');
+            background-size: cover;
+            background-position: center;
         }
 
         /* Estilos de navegação */
         nav {
-            background-color: #444; /* Define a cor de fundo do menu de navegação */
-            padding: 10px 0; /* Adiciona preenchimento no topo e na parte inferior do menu */
-            text-align: left; /* Alinha o texto do menu à esquerda */
+            background-color: #444;
+            padding: 10px 0;
+            text-align: left;
         }
 
-        /* Estilos para os links de navegação */
         nav a {
-            color: white; /* Define a cor do texto dos links como branco */
-            margin: 0 20px; /* Adiciona espaçamento entre os links */
-            text-decoration: none; /* Remove o sublinhado dos links */
-            font-size: 18px; /* Define o tamanho da fonte dos links */
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-size: 18px;
         }
 
-        /* Estilo quando o mouse passa sobre os links de navegação */
         nav a:hover {
-            text-decoration: underline; /* Adiciona sublinhado ao passar o mouse sobre os links */
+            text-decoration: underline;
         }
 
-        /* Estilos do conteúdo principal */
+        /* Estilos do conteúdo */
         .content {
-            padding: 20px; /* Adiciona preenchimento ao redor do conteúdo */
-            text-align: center; /* Centraliza o texto dentro do conteúdo */
+            padding: 20px;
+            text-align: center;
         }
 
         /* Estilos do rodapé */
         footer {
-            background-color: #333; /* Define a cor de fundo do rodapé */
-            color: white; /* Define a cor do texto do rodapé como branca */
-            text-align: center; /* Centraliza o texto do rodapé */
-            padding: 1px; /* Adiciona preenchimento ao redor do texto do rodapé */
-            position: fixed; /* Faz o rodapé fixo na parte inferior da tela */
-            width: 100%; /* Faz o rodapé ocupar toda a largura da tela */
-            bottom: 0; /* Posiciona o rodapé no fundo da tela */
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
         }
+
+        /* Classe para centralizar a imagem quando for clicada */
+        .image-expanded {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(3);
+            z-index: 1000; /* Coloca a imagem acima de outros elementos */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            cursor: zoom-out;
+        }
+
     </style>
 </head>
-
 <body>
-    <header>
-        <!-- Cabeçalho vazio, pode ser preenchido se necessário -->
-    </header>
 
     <nav>
-        <!-- Botão de navegação para retornar à página inicial -->
         <button onclick="window.location.href='paginainicial.html';">Ir para a página inicial</button>
     </nav>
 
     <div class="content">
-        <!-- Imagem principal do jogo "Coup" -->
-        <img src="coupjogo.jpg" alt="Imagem">
-        <!-- Título do jogo -->
+        <img src="coupjogo.jpg" alt="Imagem" class="image">
         <h1> Coup </h1>
 
-        <!-- Descrição do jogo "Coup" -->
         <p> Coup é um jogo de cartas baseado em blefes e dedução, que é ideal para se jogar com 3 a 5 pessoas. Cada jogador começa com 2 cartas, que são chamados de "influências", e o seu objetivo é ser o único jogador com influências na mesa. A cada rodada você pode realizar uma ação, seja ela comprar 1 moeda, comprar 2 moedas (mas correndo riscos) ou pagar 7 moedas para dar um golpe de estado e matar uma carta de qualquer adversário desejado.</p>
         <p> Cada carta possui ações diferentes que podem ser feitas. Porém aí vem a sacada, você pode blefar sobre as suas cartas e fazer ações de outras cartas, só que os outros jogadores podem duvidar de sua ação o fazendo perder uma carta, e caso você esteja falando a verdade o jogador que duvidou perde uma influência.</p>
-        <p> Algumas cartas possuem o poder de bloquear certas ações, como a Duquesa, que é uma carta que bloqueia o Assassino, ou como o Duque, que te bloqueia de pegar 2 moedas.</p>
-
-        <!-- Título do manual -->
+        <p> Algumas cartas possuem o poder de bloquear certas ações, como a Condessa, que é uma carta que bloqueia o Assassino, ou como o Duque, que pode te bloquear de pegar 2 moedas.</p>
         <h1> Manual </h1>
     </div>
     
-    <!-- Imagens adicionais na parte inferior da página -->
+    <!-- As imagens que ficarão na parte inferior -->
     <div class="bottom-images">
-        <img src="coup1.png" alt="Imagem">
-        <img src="coup2.png" alt="Imagem">
-        <img src="coup3.png" alt="Imagem">
-        <img src="coup4.png" alt="Imagem">
-        <img src="coup5.png" alt="Imagem">
-        <img src="coup6.png" alt="Imagem">
-        <img src="coup7.png" alt="Imagem">
-        <img src="coup8.png" alt="Imagem">
-        <img src="coup9.png" alt="Imagem">
-        <img src="coup10.png" alt="Imagem">
-        <img src="coup11.png" alt="Imagem">
-        <img src="coup12.png" alt="Imagem">
+        <img src="coup1.png" alt="Imagem" class="clickable-image">
+        <img src="coup2.png" alt="Imagem" class="clickable-image">
+        <img src="coup3.png" alt="Imagem" class="clickable-image">
+        <img src="coup4.png" alt="Imagem" class="clickable-image">
+        <img src="coup5.png" alt="Imagem" class="clickable-image">
+        <img src="coup6.png" alt="Imagem" class="clickable-image">
+        <img src="coup7.png" alt="Imagem" class="clickable-image">
+        <img src="coup8.png" alt="Imagem" class="clickable-image">
+        <img src="coup9.png" alt="Imagem" class="clickable-image">
+        <img src="coup10.png" alt="Imagem" class="clickable-image">
+        <img src="coup11.png" alt="Imagem" class="clickable-image">
+        <img src="coup12.png" alt="Imagem" class="clickable-image">
     </div>
 
+    <script> // Parte do código em JavaScrip
+        document.querySelectorAll('.clickable-image').forEach(img => {
+            img.addEventListener('click', function() {
+                if (!this.classList.contains('image-expanded')) {
+                    this.classList.add('image-expanded');
+                } else {
+                    this.classList.remove('image-expanded');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
 
