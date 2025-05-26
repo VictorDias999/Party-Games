@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <style>
+        h1 {
+            font-size: 50px;
+        }
+        img {
+            border-radius: 5px;
+            border: 2px solid #333;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            height: auto;
+            scale: 3;
+            transition: transform 0.3s ease-in-out;
+        }
+        img:hover {
+            transform: scale(1.1);
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('fundo1.jpg');
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 30px;
+        }
+        nav {
+            background-color: #444;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 40px;
+            text-align: center;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .image-container a {
+            display: inline-block;
+        }
+        .image-container a img {
+            width: 100%;
+            max-width: 300px;
+            max-height: 300px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Party Games</h1>
+    </header>
+    <nav>
+        <a href="coup.html">Coup</a>
+        <a href="theresistance.html">The Resistance</a>
+        <a href="war.html">War</a>
+    </nav>
+    <div class="content">
+        <div class="image-container">
+            <a href="coup.html" title="Coup - Jogo de Cartas">
+                <img src="Coup.jpg" alt="Coup">
+            </a>
+            <a href="theresistance.html" title="The Resistance - Jogo de Cartas">
+                <img src="resistance.jpg" alt="The Resistance">
+            </a>
+            <a href="war.html" title="War - Jogo de Tabuleiro">
+                <img src="warcapaSE.jpg" alt="War">
+            </a>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 - Leonel, João Victor, Yudi</p>
+    </footer>
+
+    <script>
+        // Exemplo de interação com JavaScript
+        document.querySelectorAll('.image-container a').forEach(link => {
+            link.addEventListener('click', function(event) {
+                alert('Você clicou em ' + this.querySelector('img').alt);
+            });
+        });
+    </script>
+</body>
+</html>
