@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Página Inicial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-bg: #111;
+      --color-primary: #0D214f;
+      --color-secondary: #222;
+      --color-accent: #333;
+      --color-text: #fff;
+      --color-muted: #aaa;
+      --radius: 15px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: url('fundoo.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--color-text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Novo bloco para a imagem "Raxinim" */
+    .logo-container {
+      position: absolute;
+      top: 20px; /* Ajuste a posição da imagem */
+      left: 5%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logo-container img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    header {
+      background-color: var(--color-bg);
+      padding: 10px 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--color-primary);
+      text-align: center;
+    }
+
+    nav {
+      background-color: transparent;(--color-secondary);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 60px 150px;
+      padding: 25px;
+    }
+
+    nav a {
+      color: var(--color-text);
+      text-decoration: none;
+      padding: 12px 36px;
+      border-radius: var(--radius);
+      background: var(--color-accent);
+      font-size: 1rem;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    nav a:hover {
+      background-color: var(--color-primary);
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    .content {
+      flex: 1;
+      padding: 50px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .image-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 120px;
+      width: 100%;
+      max-width: 1200px;
+      margin-top: 40px;
+    }
+
+    .game-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 180px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--color-text);
+    }
+
+    .game-card img {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      border: 3px solid var(--color-primary);
+      box-shadow: 0 5px 20px rgba(68, 255, 238, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .game-card:hover img {
+      transform: scale(1.1);
+      box-shadow: 0 8px 25px rgba(68, 255, 238, 0.6);
+    }
+
+    .game-title {
+      margin-top: 5px; /* Reduz o espaçamento entre a imagem e o título */
+      font-size: 1rem; /* Reduz o tamanho do texto */
+      color: #66B2FF;
+      text-decoration: none;
+    }
+
+    footer {
+      background-color: var(--color-bg);
+      color: var(--color-muted);
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nova div para a logo -->
+  <div class="logo-container">
+    <img src="raxinim.png" alt="Raxinim Logo" />
+  </div>
+
+  <header>
+    <h1>Party Games</h1>
+  </header>
+
+  <nav>
+    <a href="coup.html">Coup</a>
+    <a href="theresistance.html">The Resistance</a>
+    <a href="war.html">War</a>
+  </nav>
+
+  <main class="content">
+    <div class="image-container">
+      <a href="coup.html" class="game-card" title="Coup - Jogo de Cartas">
+        <img src="Coup.jpg" alt="Coup" />
+        <div class="game-title">Coup</div>
+      </a>
+      <a href="theresistance.html" class="game-card" title="The Resistance - Jogo de Cartas">
+        <img src="resistance.jpg" alt="The Resistance" />
+        <div class="game-title">The Resistance</div>
+      </a>
+      <a href="war.html" class="game-card" title="War - Jogo de Tabuleiro">
+        <img src="warcapaSE.jpg" alt="War" />
+        <div class="game-title">War</div>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 - Leonel & João Victor </p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.game-card').forEach(link => {
+      link.addEventListener('click', () => {
+        alert(`Você clicou em ${link.querySelector('img').alt}`);
+      });
+    });
+  </script>
+
+</body>
+</html>
