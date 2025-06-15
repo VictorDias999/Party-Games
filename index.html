@@ -6,6 +6,24 @@
   <title>Página Inicial</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
   <style>
+ 
+     button {
+      color: var(--color-text);
+      text-decoration: none;
+      padding: 12px 36px;
+      border-radius: var(--radius);
+      background: var(--color-accent);
+      font-size: 1rem;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: var(--color-primary);
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    
     :root {
       --color-bg: #111;
       --color-primary: #0D214f;
@@ -157,6 +175,7 @@
   </div>
 
   <header>
+    <button onclick="window.location.href='carrinho.html';">Ver Carrinho</button>
     <h1>Party Games</h1>
   </header>
 
