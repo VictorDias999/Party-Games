@@ -1,173 +1,236 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        h1{
-            color: whitesmoke;
-            margin: 30px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WarSE</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        /* Estilos da imagem */
-        img {
-            border-radius: 10px; /* Adiciona borda arredondada */
-            border: 5px solid #333; /* Define uma borda ao redor da imagem */
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* Adiciona sombra à imagem */
-            height: auto; /* Mantém a proporção da imagem */
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #1c1c1c;
+      background-image: url('fundoo.jpg');
+      background-size: cover;
+      background-position: center;
+      animation: fadeIn 1s ease-in;
+    }
 
-        /* Primeira imagem ficará centralizada */
-        .content img:first-of-type {
-            float: right; /* Alinha a imagem à direita */
-            margin-left: 20px; /* Adiciona espaço à esquerda da imagem */
-            width: 450px; /* Define a largura da imagem */
-            height: 300px; /* Mantém a proporção da imagem */
-            border-radius: 10px; /* Adiciona borda arredondada */
-            border: 5px solid #333; /* Define uma borda ao redor da imagem */
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* Adiciona sombra à imagem */
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-        /* Estilos do restante das imagens, que ficarão na parte inferior */
-        .bottom-images {
-            display: flex;
-            justify-content: center; /* Centraliza as imagens */
-            flex-wrap: wrap; /* Faz com que as imagens se ajustem se não caberem em uma linha */
-            gap: 20px; /* Espaço entre as imagens */
-            margin-top: 10px; /* Distância das imagens da parte superior */
-        }
+    nav {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 10px;
+      text-align: center;
+    }
 
-        .bottom-images img {
-            width: 150px; /* Tamanho das imagens na parte inferior */
-            height: auto;
-        }
+    nav button {
+      background-color: #221e1c;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s, transform 0.3s;
+    }
 
-        p {
-            color: whitesmoke;
-            max-width: 800px;
-            word-wrap: break-word;
-            margin: 20px;
-        }
+    nav button:hover {
+      background-color: #141e62;
+      transform: scale(1.05);
+    }
 
-        /* Estilos do botão */
-        button {
-            background-color: #221e1c;
-            color: white;
-            border: none;
-            padding: 15px 32px;
-            text-align: left;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 12px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
+    .container {
+      display: flex;
+      max-width: 1200px;
+      margin: 20px auto;
+      border-radius: 10px;
+      padding: 20px;
+      gap: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      background-color: rgba(0, 0, 0, 0.6);
+      animation: fadeInRight 1s ease-out;
+    }
 
-        button:hover {
-            background-color: #141e62;
-        }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
 
-        /* Estilos do corpo */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: left;
-            background-image: url('fundoo.jpg');
-            background-size: cover;
-            background-position: center;
-        }
+    .thumbnails {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      animation: zoom 1s ease;
+    }
 
-        /* Estilos de navegação */
-        nav {
-            background-color: transparent;
-            padding: 10px 0;
-            text-align: left;
-        }
+    @keyframes zoom {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
 
-        nav a {
-            color: white;
-            margin: 0 20px;
-            text-decoration: none;
-            font-size: 18px;
-        }
+    .thumbnails img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: border 0.3s, transform 0.3s;
+    }
 
-        nav a:hover {
-            text-decoration: underline;
-        }
+    .thumbnails img:hover,
+    .thumbnails img.active {
+      border: 2px solid #0077ff;
+      transform: scale(1.05);
+    }
 
-        /* Estilos do conteúdo */
-        .content {
-            padding: 20px;
-            text-align: center;
-        }
+    .main-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 1.2s ease;
+    }
 
-        /* Estilos do rodapé */
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
+    .main-image img {
+      max-width: 100%;
+      max-height: 600px;
+      border-radius: 12px;
+      object-fit: contain;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s;
+    }
 
-        /* Classe para centralizar a imagem quando for clicada */
-        .image-expanded {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(3);
-            z-index: 1000; /* Coloca a imagem acima de outros elementos */
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            cursor: zoom-out;
-        }
+    .main-image img:hover {
+      transform: scale(1.01);
+    }
 
-    </style>
+    .btn {
+      padding: 10px 20px;
+      background-color: #0077ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #005bcc;
+      transform: scale(1.05);
+    }
+
+    .info {
+      max-width: 500px;
+      color: #fff;
+    }
+
+    h1, h2, label {
+      color: whitesmoke;
+    }
+
+    p {
+      font-family: 'Arial', sans-serif;
+      color: whitesmoke;
+    }
+
+    .mensagem {
+      color: limegreen;
+      margin-top: 10px;
+      font-weight: bold;
+      transition: opacity 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .thumbnails {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .main-image {
+        margin-top: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <nav>
-        <button onclick="window.location.href='index.html';">Ir para a página inicial</button>
-    </nav>
+  <nav>
+    <button onclick="window.location.href='paginainicial.html';">Ir para a Página Inicial</button>
+    <button onclick="window.location.href='carrinho.html';">Ver Carrinho</button>
+  </nav>
 
-    <div class="content">
-        <img src="warjogo.jpg" alt="Imagem" class="image">
-        <h1> War </h1>
-
-        <p> War é um jogo de tabuleiro de estratégia e conquista, onde os jogadores assumem o papel de comandantes de exércitos em uma batalha pela dominação global. O objetivo principal é conquistar territórios e eliminar os adversários, utilizando uma combinação de sorte (dados) e tática.</p>
-        <p> O tabuleiro é dividido em territórios espalhados pelo mundo, e os jogadores começam com um número específico de exércitos em áreas aleatórias. Cada jogador deve planejar seus movimentos com sabedoria, atacar ou se defender estrategicamente, e formar alianças temporárias para conquistar territórios.</p>
-        <p> Cada jogador recebe um objetivo secreto no início da partida, e para vencer ele deve completá-lo utilizando diversas estratégias. É um jogo perfeito para quem gosta de desafios!</p>
-        <h1> Manual </h1>
-    </div>
-    
-    <!-- As imagens que ficarão na parte inferior -->
-    <div class="bottom-images">
-        <img src="warmanual1.png" alt="Imagem" class="clickable-image">
-        <img src="warmanual2.png" alt="Imagem" class="clickable-image">
-        <img src="warmanual3.png" alt="Imagem" class="clickable-image">
-        <img src="warmanual4.png" alt="Imagem" class="clickable-image">
-        <img src="warmanual5.png" alt="Imagem" class="clickable-image">
-        <img src="warmanual6.png" alt="Imagem" class="clickable-image">
-        <img src="warmanual7.png" alt="Imagem" class="clickable-image">
-        <img src="warmanual8.png" alt="Imagem" class="clickable-image">
+  <div class="container">
+    <div class="thumbnails">
+      <img src="warSEcaixa.jpg" alt="warSE 1" onclick="trocarImagem(this)" class="active" />
+      <img src="warSEcaixaverso.jpg" alt="warSE 2" onclick="trocarImagem(this)" />
+      <img src="warSEtabuleiro.jpg" alt="warSE 3" onclick="trocarImagem(this)" />
+      <img src="warSEjogo.jpg" alt="warSE 4" onclick="trocarImagem(this)" />
+      <img src="warSEcarta.jpg" alt="warSE 5" onclick="trocarImagem(this)" />
+      <img src="warSEmesa.jpeg" alt="warSE 6" onclick="trocarImagem(this)" />
     </div>
 
-    <script> // Parte do código em JavaScrip
-        document.querySelectorAll('.clickable-image').forEach(img => {
-            img.addEventListener('click', function() {
-                if (!this.classList.contains('image-expanded')) {
-                    this.classList.add('image-expanded');
-                } else {
-                    this.classList.remove('image-expanded');
-                }
-            });
+    <div class="main-image">
+      <img id="imagemPrincipal" src="warSEcaixa.jpg" alt="Imagem Principal" />
+    </div>
+
+    <div class="info">
+      <h1>War Edição Especial</h1>
+      <p><strong>Descrição:</strong> War é um jogo de tabuleiro clássico de estratégia e conquista, criado no Brasil. Nele, de 3 a 6 jogadores disputam o controle de territórios em um mapa-múndi dividido em continentes. Cada jogador recebe uma missão secreta, como conquistar determinados continentes ou eliminar um oponente específico.</p>
+      <p>O jogo envolve movimentação de exércitos, ataques com dados e negociações táticas. A vitória depende de planejamento, sorte nos dados e habilidade para prever os movimentos dos adversários. War é conhecido por suas partidas longas e desafiadoras, e por estimular a competição e a diplomacia entre os jogadores.</p>
+      <h2>Valor: R$175,00</h2>
+      <button class="btn" onclick="AdicionarCarrinho()">Adicionar ao carrinho</button>
+      <p class="mensagem" id="mensagem"></p>
+    </div>
+  </div>
+
+  <script>
+    function trocarImagem(element) {
+      const imagemPrincipal = document.getElementById("imagemPrincipal");
+      imagemPrincipal.src = element.src;
+
+      const miniaturas = document.querySelectorAll(".thumbnails img");
+      miniaturas.forEach(img => img.classList.remove("active"));
+      element.classList.add("active");
+    }
+
+    function AdicionarCarrinho() {
+      const imagemAtual = document.getElementById("imagemPrincipal").src;
+      const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+      const jaExiste = carrinho.some(p => p.nome === "War Edição Especial");
+
+      const mensagem = document.getElementById("mensagem");
+
+      if (!jaExiste) {
+        carrinho.push({
+          id: "war-edicao-especial",
+          nome: "War Edição Especial",
+          preco: 175.00,
+          imagem: imagemAtual
         });
-    </script>
+        localStorage.setItem("carrinho", JSON.stringify(carrinho));
+        mensagem.innerText = "Produto adicionado ao carrinho!";
+        mensagem.style.color = "limegreen";
+      } else {
+        mensagem.innerText = "Este produto já está no carrinho.";
+        mensagem.style.color = "orange";
+      }
+
+      setTimeout(() => mensagem.innerText = "", 3000);
+    }
+  </script>
 </body>
 </html>
-
