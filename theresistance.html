@@ -1,177 +1,247 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        h1{
-            color: whitesmoke;
-            margin: 30px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Resistance</title>
+  <style>
+    :root {
+      --azul: #0077ff;
+    }
 
-        /* Estilos da imagem */
-        img {
-            border-radius: 10px; /* Adiciona borda arredondada */
-            border: 5px solid #333; /* Define uma borda ao redor da imagem */
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* Adiciona sombra à imagem */
-            height: auto; /* Mantém a proporção da imagem */
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        /* Primeira imagem ficará centralizada */
-        .content img:first-of-type {
-            float: right; /* Alinha a imagem à direita */
-            margin-left: 20px; /* Adiciona espaço à esquerda da imagem */
-            width: 425px; /* Define a largura da imagem */
-            height: 310px; /* Mantém a proporção da imagem */
-            border-radius: 10px; /* Adiciona borda arredondada */
-            border: 5px solid #333; /* Define uma borda ao redor da imagem */
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* Adiciona sombra à imagem */
-        }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1c1c1c;
+      background-image: url('fundoo.jpg');
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      animation: fadeInBody 1s ease;
+    }
 
-        /* Estilos do restante das imagens, que ficarão na parte inferior */
-        .bottom-images {
-            display: flex;
-            justify-content: center; /* Centraliza as imagens */
-            flex-wrap: wrap; /* Faz com que as imagens se ajustem se não caberem em uma linha */
-            gap: 20px; /* Espaço entre as imagens */
-            margin-top: 10px; /* Distância das imagens da parte superior */
-        }
+    @keyframes fadeInBody {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-        .bottom-images img {
-            width: 150px; /* Tamanho das imagens na parte inferior */
-            height: auto;
-        }
+    nav {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 10px;
+      text-align: center;
+    }
 
-        p {
-            color: whitesmoke;
-            max-width: 800px;
-            word-wrap: break-word;
-            margin: 20px;
-        }
+    nav button {
+      background-color: #221e1c;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin: 5px;
+      transition: background 0.3s, transform 0.2s;
+    }
 
-        /* Estilos do botão */
-        button {
-            background-color: #221e1c;
-            color: white;
-            border: none;
-            padding: 15px 32px;
-            text-align: left;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 12px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
+    nav button:hover {
+      background-color: #141e62;
+      transform: scale(1.05);
+    }
 
-        button:hover {
-            background-color: #141e62;
-        }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 30px auto;
+      border-radius: 10px;
+      padding: 20px;
+      gap: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      animation: fadeInContainer 1.2s ease;
+    }
 
-        /* Estilos do corpo */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: left;
-            background-image: url('fundoo.jpg');
-            background-size: cover;
-            background-position: center;
-        }
+    @keyframes fadeInContainer {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        /* Estilos de navegação */
-        nav {
-            background-color: transparent;
-            padding: 10px 0;
-            text-align: left;
-        }
+    .thumbnails {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
 
-        nav a {
-            color: white;
-            margin: 0 20px;
-            text-decoration: none;
-            font-size: 18px;
-        }
+    .thumbnails img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform 0.3s, border 0.3s;
+      opacity: 0.8;
+    }
 
-        nav a:hover {
-            text-decoration: underline;
-        }
+    .thumbnails img:hover,
+    .thumbnails img.active {
+      border: 2px solid var(--azul);
+      opacity: 1;
+      transform: scale(1.05);
+    }
 
-        /* Estilos do conteúdo */
-        .content {
-            padding: 20px;
-            text-align: center;
-        }
+    .main-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 1s;
+    }
 
-        /* Estilos do rodapé */
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
+    .main-image img {
+      max-width: 100%;
+      max-height: 600px;
+      border-radius: 12px;
+      object-fit: contain;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      transition: transform 0.4s ease;
+    }
 
-        /* Classe para centralizar a imagem quando for clicada */
-        .image-expanded {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(4);
-            z-index: 1000; /* Coloca a imagem acima de outros elementos */
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            cursor: zoom-out;
-        }
+    .main-image img:hover {
+      transform: scale(1.02);
+    }
 
-    </style>
+    .info {
+      max-width: 500px;
+      color: whitesmoke;
+      animation: fadeInRight 1s ease;
+    }
+
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background-color: var(--azul);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #005fcc;
+      transform: scale(1.05);
+    }
+
+    h1, h2 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    .mensagem {
+      color: limegreen;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .main-image img {
+        max-height: 300px;
+      }
+
+      .info {
+        text-align: center;
+      }
+
+      .thumbnails {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .thumbnails img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <nav>
-        <button onclick="window.location.href='index.html';">Ir para a página inicial</button>
-    </nav>
+  <nav>
+    <button onclick="window.location.href='paginainicial.html';">Página Inicial</button>
+    <button onclick="window.location.href='carrinho.html';">Ver Carrinho</button>
+  </nav>
 
-    <div class="content">
-        <img src="resistancejogo.jpeg" alt="Imagem" class="image">
-        <h1> The Resistance </h1>
-
-        <p> The Resistance é um jogo de dedução e impostores, em que "há impostores entres nós". E nesse jogo você interpreta um membro da resistência de um governo corrupto que participa de missões para derrubá-lo, ou um espião do governo infiltrado na resistência que deseja sabotar as missões.</p>
-        <p> No jogo existem um total de 5 missões para serem realizadas, cada uma com uma certa quantidade de jogadores. Para a resistência ganhar 3 missões devem ser realizadas com sucesso, e para os espiões ganharem eles devem conseguir sabotar 3 missões.</p>
-        <p> A cada rodada uma pessoa poderá fazer uma sugestão de uma equipe para a missão, e os demais jogadores devem votar se concordam ou não com a equipe da missão. E uma vez que os espiões estão infiltrados na missão, eles podem escolher se desejam sabotar a missão ou não, e se escolherem sabotar a missão falhará.</p>
-        <h1> Manual </h1>
-    </div>
-    
-    <!-- As imagens que ficarão na parte inferior -->
-    <div class="bottom-images">
-        <img src="resistance1.png" alt="Imagem" class="clickable-image">
-        <img src="resistance2.png" alt="Imagem" class="clickable-image">
-        <img src="resistance3.png" alt="Imagem" class="clickable-image">
-        <img src="resistance4.png" alt="Imagem" class="clickable-image">
-        <img src="resistance5.png" alt="Imagem" class="clickable-image">
-        <img src="resistance6.png" alt="Imagem" class="clickable-image">
-        <img src="resistance7.png" alt="Imagem" class="clickable-image">
-        <img src="resistance8.png" alt="Imagem" class="clickable-image">
-        <img src="resistance9.png" alt="Imagem" class="clickable-image">
-        <img src="resistance10.png" alt="Imagem" class="clickable-image">
-        <img src="resistance11.png" alt="Imagem" class="clickable-image">
-        <img src="resistance12.png" alt="Imagem" class="clickable-image">
+  <div class="container">
+    <div class="thumbnails">
+      <img src="resistancecaixa.jpg" alt="resistance 1" onclick="trocarImagem(this)" class="active" />
+      <img src="resistancecaixaverso.jpg" alt="resistance 2" onclick="trocarImagem(this)" />
+      <img src="resistancejogo.jpeg" alt="resistance 3" onclick="trocarImagem(this)" />
+      <img src="resistancea1.jpg" alt="resistance 4" onclick="trocarImagem(this)" />
+      <img src="resistancea2.jpg" alt="resistance 5" onclick="trocarImagem(this)" />
+      <img src="resistancea3.jpg" alt="resistance 6" onclick="trocarImagem(this)" />
     </div>
 
-    <script> // Parte do código em JavaScrip
-        document.querySelectorAll('.clickable-image').forEach(img => {
-            img.addEventListener('click', function() {
-                if (!this.classList.contains('image-expanded')) {
-                    this.classList.add('image-expanded');
-                } else {
-                    this.classList.remove('image-expanded');
-                }
-            });
+    <div class="main-image">
+      <img id="imagemPrincipal" src="resistancecaixa.jpg" alt="Imagem Principal" />
+    </div>
+
+    <div class="info">
+      <h1>The Resistance</h1>
+      <p><strong>Descrição:</strong> The Resistance é um jogo de dedução social para 5 a 10 jogadores. Os participantes assumem papéis secretos como membros da resistência ou espiões infiltrados. O objetivo da resistência é completar três missões sem serem sabotados pelos espiões.</p>
+      <p>As rodadas envolvem discussões, acusações e votações. A tensão gira em torno da confiança e da suspeita: argumente, engane e descubra quem está dizendo a verdade!</p>
+      <p>Não há eliminação de jogadores. O jogo é conhecido por sua intensidade, reviravoltas e foco em estratégias sociais e psicológicas.</p>
+      <h2>Valor: R$149,90</h2>
+      <button class="btn" onclick="AdicionarCarrinho()">Adicionar ao carrinho</button>
+      <p class="mensagem" id="mensagem"></p>
+    </div>
+  </div>
+
+  <script>
+    function trocarImagem(element) {
+      const imagemPrincipal = document.getElementById("imagemPrincipal");
+      imagemPrincipal.src = element.src;
+
+      const miniaturas = document.querySelectorAll(".thumbnails img");
+      miniaturas.forEach(img => img.classList.remove("active"));
+      element.classList.add("active");
+    }
+
+    function AdicionarCarrinho() {
+      const imagemAtual = document.getElementById("imagemPrincipal").src;
+      const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+      const jaExiste = carrinho.some(p => p.imagem === imagemAtual);
+
+      if (!jaExiste) {
+        carrinho.push({
+          nome: "The Resistance",
+          preco: 149.90,
+          imagem: imagemAtual
         });
-    </script>
+        localStorage.setItem("carrinho", JSON.stringify(carrinho));
+        document.getElementById("mensagem").innerText = "Produto adicionado ao carrinho!";
+      } else {
+        document.getElementById("mensagem").innerText = "Este produto já está no carrinho.";
+      }
+    }
+  </script>
 </body>
 </html>
-
