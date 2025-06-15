@@ -10,10 +10,12 @@
       color: white;
       font-family: Arial, sans-serif;
       padding: 20px;
+      overflow-x: hidden;
     }
 
     h1, h2 {
       text-align: center;
+      animation: fadeIn 1s ease forwards;
     }
 
     .container {
@@ -22,21 +24,27 @@
       background-color: #1f1f1f;
       padding: 20px;
       border-radius: 10px;
+      animation: fadeInUp 1s ease forwards;
     }
 
     .section {
       margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
     }
 
     .label {
       font-weight: bold;
       margin-top: 10px;
+      display: block;
     }
 
     .total {
       font-size: 1.2em;
       color: #00ff88;
       text-align: center;
+      animation: fadeIn 1s ease forwards;
     }
 
     .btn {
@@ -48,6 +56,12 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: #005fcc;
+      transform: scale(1.05);
     }
 
     .produto {
@@ -55,6 +69,7 @@
       align-items: center;
       gap: 10px;
       margin: 10px 0;
+      animation: fadeInUp 0.8s ease forwards;
     }
 
     .produto img {
@@ -62,14 +77,48 @@
       height: 60px;
       object-fit: contain;
       border-radius: 5px;
+      transition: transform 0.3s ease;
     }
 
-    select, input[type="text"] {
+    .produto img:hover {
+      transform: scale(1.1);
+    }
+
+    select,
+    input[type="text"] {
       width: 100%;
       padding: 10px;
       border-radius: 5px;
       border: none;
       margin-top: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    select:focus,
+    input[type="text"]:focus {
+      background-color: #2a2a2a;
+      outline: none;
+    }
+
+    /* Animações */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
   </style>
 </head>
@@ -138,9 +187,8 @@
         total += item.preco;
       });
 
-      totalValor.innerText = `Total a pagar: R$ ${total.toFixed(2)}`;
-
-      gerarCodigoPagamento(); // gera código ao carregar
+      totalValor.textContent = `Total a pagar: R$ ${total.toFixed(2)}`;
+      gerarCodigoPagamento(); // Gera código ao carregar
     }
 
     function gerarCodigoPagamento() {
@@ -148,7 +196,7 @@
       const inputCodigo = document.getElementById("codigoPagamento");
 
       if (forma === "pix") {
-        inputCodigo.value = "pix-" + Math.random().toString(36).substring(2, 10).toUpperCase();
+        inputCodigo.value = "PIX-" + Math.random().toString(36).substring(2, 10).toUpperCase();
       } else if (forma === "boleto") {
         let codigo = "";
         for (let i = 0; i < 47; i++) {
@@ -186,4 +234,3 @@
   </script>
 </body>
 </html>
-
