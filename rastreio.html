@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Rastreamento do Pedido</title>
   <style>
     body {
@@ -10,22 +10,34 @@
       color: white;
       font-family: Arial, sans-serif;
       padding: 20px;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     h1, h2 {
       text-align: center;
+      animation: fadeIn 1s ease forwards;
     }
 
     .container {
       max-width: 600px;
-      margin: auto;
+      width: 100%;
       background-color: #1f1f1f;
       padding: 20px;
       border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+      animation: fadeInUp 1s ease forwards;
     }
 
     .section {
       margin-bottom: 20px;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+      animation-fill-mode: forwards;
     }
 
     .label {
@@ -35,6 +47,22 @@
       display: block;
     }
 
+    #codigoRastreio {
+      margin-top: 5px;
+      font-size: 1.1em;
+      color: #00ff88;
+    }
+
+    #codigoRastreio a {
+      color: #00ff88;
+      text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+
+    #codigoRastreio a:hover {
+      color: #88ffaa;
+    }
+
     .status {
       font-size: 1.2em;
       font-weight: bold;
@@ -42,17 +70,39 @@
       border-radius: 6px;
       text-align: center;
       margin-bottom: 15px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: background-color 0.5s ease, color 0.5s ease, opacity 0.7s ease, transform 0.7s ease;
     }
 
-    .status.preparo { background-color: #ff9800; color: #121212; }
-    .status.enviado { background-color: #2196f3; color: white; }
-    .status.entregue { background-color: #4caf50; color: white; }
+    .status.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .status.preparo {
+      background-color: #ff9800;
+      color: #121212;
+    }
+
+    .status.enviado {
+      background-color: #2196f3;
+      color: white;
+    }
+
+    .status.entregue {
+      background-color: #4caf50;
+      color: white;
+    }
 
     .produto {
       display: flex;
       align-items: center;
       gap: 10px;
       margin: 10px 0;
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: fadeInRight 0.6s forwards;
     }
 
     .produto img {
@@ -60,18 +110,59 @@
       height: 60px;
       object-fit: contain;
       border-radius: 5px;
+      transition: transform 0.3s ease;
+      box-shadow: 0 0 8px rgba(0,255,136,0.3);
+    }
+
+    .produto img:hover {
+      transform: scale(1.1);
     }
 
     .btn-voltar {
       display: block;
       margin: 30px auto 0;
-      padding: 10px 20px;
+      padding: 12px 25px;
       background-color: #0077ff;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 1em;
+      font-size: 1.1em;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 8px rgba(0, 119, 255, 0.5);
+    }
+
+    .btn-voltar:hover {
+      background-color: #005fcc;
+      transform: scale(1.05);
+    }
+
+    /* Animações */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
   </style>
 </head>
@@ -98,66 +189,76 @@
 
     <button class="btn-voltar" onclick="voltarPaginaInicial()">Voltar para a Página Inicial</button>
   </div>
-<script>
-  const usuario = JSON.parse(localStorage.getItem("usuario"));
-  const carrinho = JSON.parse(localStorage.getItem("carrinhoAntigo"));
-  const codigoPagamento = localStorage.getItem("codigoPagamento");
 
-  // Gerador de código de rastreio estilo Correios
-  function gerarCodigoCorreios() {
-    const prefixo = "PM"; // ou "LB", "BR", etc.
-    const sufixo = "BR";
-    const numeros = Math.floor(Math.random() * 900000000 + 100000000); // 9 dígitos
-    return `${prefixo}${numeros}BR`;
-  }
+  <script>
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    const carrinho = JSON.parse(localStorage.getItem("carrinhoAntigo"));
+    const codigoPagamento = localStorage.getItem("codigoPagamento");
 
-  const codigoCorreios = gerarCodigoCorreios();
-
-  const statusSimulado = ["preparo", "enviado", "entregue"];
-  const statusAleatorio = statusSimulado[Math.floor(Math.random() * statusSimulado.length)];
-
-  function carregarRastreio() {
-    if (!usuario || !carrinho || !codigoPagamento) {
-      alert("Pedido não encontrado.");
-      window.location.href = "paginainicial.html";
-      return;
+    function gerarCodigoCorreios() {
+      const prefixo = "PM";
+      const sufixo = "BR";
+      const numeros = Math.floor(Math.random() * 900000000 + 100000000);
+      return `${prefixo}${numeros}${sufixo}`;
     }
 
-    document.getElementById("codigoRastreio").innerHTML = `
-      ${codigoCorreios}<br>
-      <a href="https://www2.correios.com.br/sistemas/rastreamento/default.cfm" 
-         target="_blank" style="color:#00ff88; text-decoration:underline;">
-         Rastrear nos Correios
-      </a>
-    `;
+    const codigoCorreios = gerarCodigoCorreios();
 
-    document.getElementById("statusPedido").innerText = `Status: ${statusAleatorio.charAt(0).toUpperCase() + statusAleatorio.slice(1)}`;
-    document.getElementById("statusPedido").classList.add(statusAleatorio);
+    // Status possíveis, você pode incluir "entregue" para futuras atualizações
+    const statusSimulado = ["preparo", "enviado"];
+    const statusAleatorio = statusSimulado[Math.floor(Math.random() * statusSimulado.length)];
 
-    document.getElementById("dadosCliente").innerHTML = `
-      <strong>Nome:</strong> ${usuario.nome}<br>
-      <strong>Email:</strong> ${usuario.email}<br>
-      <strong>Endereço:</strong> ${usuario.endereco}<br>
-    `;
+    function carregarRastreio() {
+      if (!usuario || !carrinho || !codigoPagamento) {
+        alert("Pedido não encontrado.");
+        window.location.href = "paginainicial.html";
+        return;
+      }
 
-    const lista = document.getElementById("listaProdutos");
-    carrinho.forEach(item => {
-      const div = document.createElement("div");
-      div.className = "produto";
-      div.innerHTML = `
-        <img src="${item.imagem}" alt="${item.nome}" />
-        <span>${item.nome} - R$ ${item.preco.toFixed(2)}</span>
+      // Código rastreio + link
+      const codigoEl = document.getElementById("codigoRastreio");
+      codigoEl.innerHTML = `
+        ${codigoCorreios}<br>
+        <a href="https://www2.correios.com.br/sistemas/rastreamento/default.cfm" 
+           target="_blank" rel="noopener noreferrer">
+           Rastrear nos Correios
+        </a>
       `;
-      lista.appendChild(div);
-    });
-  }
 
-  function voltarPaginaInicial() {
-    window.location.href = "paginainicial.html";
-  }
+      // Atualiza status - limpa classes anteriores e adiciona só a correta
+      const statusEl = document.getElementById("statusPedido");
+      statusEl.textContent = `Status: ${statusAleatorio.charAt(0).toUpperCase() + statusAleatorio.slice(1)}`;
+      statusEl.classList.remove("preparo", "enviado", "entregue");
+      statusEl.classList.add(statusAleatorio, "show");
 
-  carregarRastreio();
-</script>
+      // Dados do cliente
+      const dadosEl = document.getElementById("dadosCliente");
+      dadosEl.innerHTML = `
+        <strong>Nome:</strong> ${usuario.nome}<br>
+        <strong>Email:</strong> ${usuario.email}<br>
+        <strong>Endereço:</strong> ${usuario.endereco}<br>
+      `;
+
+      // Lista produtos - limpa antes de preencher
+      const lista = document.getElementById("listaProdutos");
+      lista.innerHTML = "";
+      carrinho.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "produto";
+        div.style.animationDelay = `${index * 0.15}s`; // delay animado por produto
+        div.innerHTML = `
+          <img src="${item.imagem}" alt="${item.nome}" />
+          <span>${item.nome} - R$ ${item.preco.toFixed(2)}</span>
+        `;
+        lista.appendChild(div);
+      });
+    }
+
+    function voltarPaginaInicial() {
+      window.location.href = "paginainicial.html";
+    }
+
+    carregarRastreio();
+  </script>
 </body>
 </html>
-
