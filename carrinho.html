@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Carrinho</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .produto {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background-color: #1f1f1f;
+      margin: 15px 0;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .produto img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      border-radius: 5px;
+    }
+
+    .info {
+      flex: 1;
+    }
+
+    .preco {
+      font-weight: bold;
+      color: #00ff88;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background-color: #0077ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+
+    .btn-danger {
+      background-color: #ff4444;
+    }
+
+    .total {
+      font-size: 1.2em;
+      margin-top: 20px;
+    }
+
+    .vazio {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 1.2em;
+    }
+
+    /* === Modal === */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal {
+      background-color: #1f1f1f;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 400px;
+      width: 100%;
+      color: white;
+      position: relative;
+    }
+
+    .modal input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Seu Carrinho</h1>
+
+  <div id="listaCarrinho"></div>
+  <div class="total" id="total"></div>
+
+  <button class="btn btn-danger" onclick="limparCarrinho()">Limpar Carrinho</button>
+  <button class="btn" onclick="window.location.href='paginainicial.html'">Voltar à Loja</button>
+  <button class="btn" onclick="abrirCadastro()">Cadastrar</button>
+  <button class="btn" onclick="finalizarPedido()">Finalizar Pedido</button>
+
+  <!-- Modal de Cadastro -->
+  <div class="modal-overlay" id="modalCadastro" onclick="fecharFora(event)">
+    <div class="modal">
+      <button class="close-btn" onclick="fecharCadastro()">X</button>
+      <h2>Cadastro</h2>
+
+      <input type="text" id="cadastroNome" placeholder="Nome" required />
+      <input type="email" id="cadastroEmail" placeholder="Email" required />
+      <input type="password" id="cadastroSenha" placeholder="Senha" required />
+      <input type="text" id="cadastroCPF" placeholder="CPF" required />
+      <input type="text" id="cadastroEndereco" placeholder="Endereço (CEP, Rua, Número)" required />
+
+      <button class="btn" onclick="enviarCadastro()">Finalizar Cadastro</button>
+    </div>
+  </div>
+
+  <script>
+    function carregarCarrinho() {
+      const listaCarrinho = document.getElementById("listaCarrinho");
+      const totalDiv = document.getElementById("total");
+      const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+      if (carrinho.length === 0) {
+        listaCarrinho.innerHTML = `<p class="vazio">Seu carrinho está vazio.</p>`;
+        totalDiv.innerHTML = "";
+        return;
+      }
+
+      let total = 0;
+      listaCarrinho.innerHTML = "";
+
+      carrinho.forEach((item) => {
+        total += item.preco;
+
+        const div = document.createElement("div");
+        div.className = "produto";
+        div.innerHTML = `
+          <img src="${item.imagem}" alt="${item.nome}">
+          <div class="info">
+            <h3>${item.nome}</h3>
+            <p class="preco">R$ ${item.preco.toFixed(2)}</p>
+          </div>
+        `;
+        listaCarrinho.appendChild(div);
+      });
+
+      totalDiv.innerHTML = `<strong>Total:</strong> R$ ${total.toFixed(2)}`;
+    }
+
+    function limparCarrinho() {
+      localStorage.removeItem("carrinho");
+      carregarCarrinho();
+    }
+
+    function abrirCadastro() {
+      document.getElementById("modalCadastro").style.display = "flex";
+    }
+
+    function fecharCadastro() {
+      document.getElementById("modalCadastro").style.display = "none";
+    }
+
+    function fecharFora(event) {
+      if (event.target.id === "modalCadastro") {
+        fecharCadastro();
+      }
+    }
+
+    function enviarCadastro() {
+      const nome = document.getElementById("cadastroNome").value;
+      const email = document.getElementById("cadastroEmail").value;
+      const senha = document.getElementById("cadastroSenha").value;
+      const cpf = document.getElementById("cadastroCPF").value;
+      const endereco = document.getElementById("cadastroEndereco").value;
+
+      if (!nome || !email || !senha || !cpf || !endereco) {
+        alert("Preencha todos os campos!");
+        return;
+      }
+
+      const usuario = { nome, email, senha, cpf, endereco };
+      localStorage.setItem("usuario", JSON.stringify(usuario));
+      alert("Cadastro realizado com sucesso!");
+      fecharCadastro();
+    }
+
+    function finalizarPedido() {
+      const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+      if (!usuario) {
+        alert("Você precisa se cadastrar antes de finalizar o pedido.");
+        abrirCadastro();
+        return;
+      }
+
+      alert(`Pedido finalizado com sucesso!\nObrigado, ${usuario.nome}!`);
+      window.location.href = 'pagamento.html';
+    }
+
+    carregarCarrinho();
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pagamento</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #1f1f1f;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .label {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .total {
+      font-size: 1.2em;
+      color: #00ff88;
+      text-align: center;
+    }
+
+    .btn {
+      display: block;
+      margin: 20px auto 0;
+      padding: 10px 20px;
+      background-color: #0077ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .produto {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .produto img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      border-radius: 5px;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Finalizar Pagamento</h1>
+
+  <div class="container">
+    <div class="section">
+      <h2>Dados do Cliente</h2>
+      <p id="dadosCliente"></p>
+    </div>
+
+    <div class="section">
+      <h2>Itens no Carrinho</h2>
+      <div id="listaProdutos"></div>
+      <p class="total" id="totalValor"></p>
+    </div>
+
+    <div class="section">
+      <h2>Forma de Pagamento</h2>
+      <label class="label">Selecione:</label>
+      <select id="formaPagamento" onchange="gerarCodigoPagamento()">
+        <option value="pix">Pix</option>
+        <option value="boleto">Boleto Bancário</option>
+      </select>
+
+      <label class="label">Código do Pagamento:</label>
+      <input type="text" id="codigoPagamento" readonly />
+    </div>
+
+    <button class="btn" onclick="confirmarPagamento()">Confirmar Pagamento</button>
+  </div>
+
+  <script>
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    function carregarDados() {
+      const dadosCliente = document.getElementById("dadosCliente");
+      const listaProdutos = document.getElementById("listaProdutos");
+      const totalValor = document.getElementById("totalValor");
+
+      if (!usuario || carrinho.length === 0) {
+        alert("Dados incompletos ou carrinho vazio.");
+        window.location.href = "carrinho.html";
+        return;
+      }
+
+      dadosCliente.innerHTML = `
+        <strong>Nome:</strong> ${usuario.nome}<br>
+        <strong>Email:</strong> ${usuario.email}<br>
+        <strong>Endereço:</strong> ${usuario.endereco}<br>
+      `;
+
+      let total = 0;
+      listaProdutos.innerHTML = "";
+
+      carrinho.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "produto";
+        div.innerHTML = `
+          <img src="${item.imagem}" alt="${item.nome}" />
+          <span>${item.nome} - R$ ${item.preco.toFixed(2)}</span>
+        `;
+        listaProdutos.appendChild(div);
+        total += item.preco;
+      });
+
+      totalValor.innerText = `Total a pagar: R$ ${total.toFixed(2)}`;
+
+      gerarCodigoPagamento(); // gera código ao carregar
+    }
+
+    function gerarCodigoPagamento() {
+      const forma = document.getElementById("formaPagamento").value;
+      const inputCodigo = document.getElementById("codigoPagamento");
+
+      if (forma === "pix") {
+        inputCodigo.value = "pix-" + Math.random().toString(36).substring(2, 10).toUpperCase();
+      } else if (forma === "boleto") {
+        let codigo = "";
+        for (let i = 0; i < 47; i++) {
+          codigo += Math.floor(Math.random() * 10);
+        }
+        inputCodigo.value = codigo;
+      }
+    }
+
+    function confirmarPagamento() {
+      const codigo = document.getElementById("codigoPagamento").value.trim();
+
+      if (!usuario) {
+        alert("Usuário não cadastrado.");
+        window.location.href = "carrinho.html";
+        return;
+      }
+
+      if (codigo === "") {
+        alert("Código de pagamento inválido.");
+        return;
+      }
+
+      // Armazenar dados do pedido para a página de rastreio
+      localStorage.setItem("carrinhoAntigo", JSON.stringify(carrinho));
+      localStorage.setItem("codigoPagamento", codigo);
+
+      alert(`Pagamento confirmado!\nObrigado pela compra, ${usuario.nome}!`);
+      localStorage.removeItem("carrinho");
+
+      window.location.href = "rastreio.html";
+    }
+
+    carregarDados();
+  </script>
+</body>
+</html>
+
