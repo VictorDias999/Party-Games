@@ -51,7 +51,6 @@
 
     button:hover {
       background-color: #707582;
-      color: var(--color-text);
       transform: scale(1.05);
     }
 
@@ -149,15 +148,15 @@
       animation: fadeIn 1s ease-in;
     }
 
-    /* --- CORREÇÃO AQUI --- */
+    /* --- IMAGENS SEM FUNDO --- */
     .game-card img {
       width: 220px;
       height: 220px;
       object-fit: contain;
-      background-color: #000; /* opcional */
+      background: transparent;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    /* --------------------- */
+    /* -------------------------- */
 
     .game-card:hover img {
       transform: scale(1.1);
