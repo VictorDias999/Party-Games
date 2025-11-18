@@ -116,7 +116,6 @@
 
     nav a:hover {
       background-color: #707582;
-      color: var(--color-text);
       transform: scale(1.05);
     }
 
@@ -145,19 +144,20 @@
       align-items: center;
       width: 180px;
       text-align: center;
-      text-decoration: none;
       color: var(--color-text);
       transition: transform 0.3s ease;
       animation: fadeIn 1s ease-in;
     }
 
+    /* --- CORREÇÃO AQUI --- */
     .game-card img {
       width: 220px;
       height: 220px;
-      object-fit: cover;
-
+      object-fit: contain;
+      background-color: #000; /* opcional */
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+    /* --------------------- */
 
     .game-card:hover img {
       transform: scale(1.1);
@@ -167,7 +167,6 @@
       margin-top: 1px;
       font-size: 0.95rem;
       color: #66B2FF;
-      text-decoration: none;
     }
 
     footer {
@@ -198,15 +197,15 @@
 
   <main class="content">
     <div class="image-container">
-      <a href="coup.html" class="game-card" title="Coup - Jogo de Cartas">
+      <a href="coup.html" class="game-card">
         <img src="coupcaixasf.png" alt="Coup" />
         <div class="game-title">Coup</div>
       </a>
-      <a href="theresistance.html" class="game-card" title="The Resistance - Jogo de Cartas">
+      <a href="theresistance.html" class="game-card">
         <img src="resistancecaixasf.png" alt="The Resistance" />
         <div class="game-title">The Resistance</div>
       </a>
-      <a href="War.html" class="game-card" title="War - Jogo de Tabuleiro">
+      <a href="War.html" class="game-card">
         <img src="warSEcaixasf.png" alt="War" />
         <div class="game-title">War</div>
       </a>
@@ -219,9 +218,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
